@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/dev', label: 'Dev' },
+  { href: '/art', label: 'Art' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<header class="border-b border-neutral-200 dark:border-neutral-800">
+  <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+    <a href="/" class="font-semibold tracking-tight">{site.name}</a>
+    <nav class="flex items-center gap-6 text-sm">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`hover:text-neutral-950 dark:hover:text-white ${
+            current === item.href
+              ? 'font-medium text-neutral-950 dark:text-white'
+              : 'text-neutral-500 dark:text-neutral-400'
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.resumeUrl}
+        download
+        class="rounded-full border border-neutral-300 px-3 py-1.5 text-neutral-900 hover:border-neutral-900 dark:border-neutral-700 dark:text-neutral-100 dark:hover:border-white"
+      >
+        Resume
+      </a>
+    </nav>
+  </div>
+</header>

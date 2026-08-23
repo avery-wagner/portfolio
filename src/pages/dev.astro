@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="Dev" description="Software projects by Avery Wagner.">
+  <h1 class="text-3xl font-bold tracking-tight">Dev</h1>
+  <p class="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">
+    A few things I've built. More on the way.
+  </p>
+
+  {
+    projects.length === 0 ? (
+      <p class="mt-16 text-neutral-500 dark:text-neutral-400">
+        Nothing posted yet — check back soon, or see what I'm up to on{' '}
+        <a href="https://github.com/avery-wagner" class="underline">
+          GitHub
+        </a>{' '}
+        in the meantime.
+      </p>
+    ) : (
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            tags={project.data.tags}
+            repoUrl={project.data.repoUrl}
+            liveUrl={project.data.liveUrl}
+          />
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>

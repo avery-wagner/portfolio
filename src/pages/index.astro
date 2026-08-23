@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { experience, skills } from '../data/site';
+---
+
+<BaseLayout title="Home">
+  <section class="flex flex-col gap-4">
+    <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Hi, I'm</p>
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Avery Wagner</h1>
+    <p class="max-w-xl text-lg text-neutral-600 dark:text-neutral-400">
+      TODO — one line describing what you do (your LinkedIn headline is a good start).
+    </p>
+    <div class="flex gap-4 pt-2">
+      <a
+        href="/dev"
+        class="rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white dark:bg-white dark:text-neutral-900"
+      >
+        See my work
+      </a>
+      <a
+        href="/contact"
+        class="rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-medium dark:border-neutral-700"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <section class="mt-24">
+    <h2 class="text-sm font-semibold tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+      About
+    </h2>
+    <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">
+      TODO — a few sentences about you: what you do, what you're into, what
+      you're looking for. This is the elevator-pitch version of your LinkedIn
+      "About" section.
+    </p>
+
+    {
+      experience.length > 0 && (
+        <ol class="mt-8 flex flex-col gap-6">
+          {experience.map((job) => (
+            <li>
+              <p class="font-medium">
+                {job.role} · {job.org}
+              </p>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                {job.start} – {job.end}
+              </p>
+              <p class="mt-1 text-neutral-600 dark:text-neutral-400">{job.summary}</p>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      skills.length > 0 && (
+        <ul class="mt-8 flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <li class="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  medium: string;
+  year: number;
+  image: string;
+}
+
+const { title, medium, year, image } = Astro.props;
+---
+
+<figure class="group overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
+  <img
+    src={image}
+    alt={title}
+    loading="lazy"
+    decoding="async"
+    class="aspect-4/5 w-full object-cover transition group-hover:scale-105"
+  />
+  <figcaption class="p-4">
+    <p class="font-medium">{title}</p>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">{medium}, {year}</p>
+  </figcaption>
+</figure>

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description="Get in touch with Avery Wagner.">
+  <h1 class="text-3xl font-bold tracking-tight">Contact</h1>
+  <p class="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">
+    Reach out directly, or use the form below.
+  </p>
+
+  <div class="mt-6 flex flex-wrap gap-4 text-sm font-medium">
+    <a href={`mailto:${site.email}`} class="underline">{site.email}</a>
+    <a href={site.linkedin} class="underline">LinkedIn</a>
+    <a href={site.github} class="underline">GitHub</a>
+  </div>
+
+  <!--
+    TODO: this form posts to Formspree (https://formspree.io — free tier, no backend needed).
+    Sign up, create a form, and replace YOUR_FORM_ID below with the ID it gives you.
+    Until then, submitting this form will 404.
+  -->
+  <form
+    action="https://formspree.io/f/YOUR_FORM_ID"
+    method="POST"
+    class="mt-12 flex max-w-md flex-col gap-4"
+  >
+    <label class="flex flex-col gap-1.5 text-sm font-medium">
+      Name
+      <input
+        type="text"
+        name="name"
+        required
+        class="rounded-lg border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
+      />
+    </label>
+    <label class="flex flex-col gap-1.5 text-sm font-medium">
+      Email
+      <input
+        type="email"
+        name="_replyto"
+        required
+        class="rounded-lg border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
+      />
+    </label>
+    <label class="flex flex-col gap-1.5 text-sm font-medium">
+      Message
+      <textarea
+        name="message"
+        rows="5"
+        required
+        class="rounded-lg border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
+      ></textarea>
+    </label>
+    <label class="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="resume_request" value="yes" />
+      Send me your resume
+    </label>
+    <button
+      type="submit"
+      class="mt-2 self-start rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white dark:bg-white dark:text-neutral-900"
+    >
+      Send
+    </button>
+  </form>
+</BaseLayout>
