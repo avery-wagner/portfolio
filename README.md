@@ -1,6 +1,6 @@
 # averywagner.dev
 
-Personal portfolio — Astro + Tailwind, deployed to GitHub Pages at `averywagner.dev`.
+Personal portfolio, made with Astro + Tailwind, deployed to GitHub Pages at `averywagner.dev`.
 
 ## Structure
 
