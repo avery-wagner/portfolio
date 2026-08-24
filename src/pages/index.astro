@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { experience, skills } from '../data/site';
+import SkillGroup from '../components/SkillGroup.astro';
+import { site, experience, profesh_skills, tech_skill_areas, art_skill_areas, music_skills } from '../data/site';
 ---
 
 <BaseLayout title="Home">
@@ -8,7 +9,7 @@ import { experience, skills } from '../data/site';
     <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Hi, I'm</p>
     <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Avery Wagner</h1>
     <p class="max-w-xl text-lg text-neutral-600 dark:text-neutral-400">
-      TODO — one line describing what you do (your LinkedIn headline is a good start).
+      { site.tagline }
     </p>
     <div class="flex gap-4 pt-2">
       <a
@@ -31,9 +32,13 @@ import { experience, skills } from '../data/site';
       About
     </h2>
     <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">
-      TODO — a few sentences about you: what you do, what you're into, what
-      you're looking for. This is the elevator-pitch version of your LinkedIn
-      "About" section.
+      { site.about[0] }
+    </p>
+    <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">
+      { site.about[1] }
+    </p>
+    <p class="mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300">
+      { site.about[2] }
     </p>
 
     {
@@ -47,23 +52,26 @@ import { experience, skills } from '../data/site';
               <p class="text-sm text-neutral-500 dark:text-neutral-400">
                 {job.start} – {job.end}
               </p>
-              <p class="mt-1 text-neutral-600 dark:text-neutral-400">{job.summary}</p>
+              {
+                job.bullets.length > 0 && (
+                  <ul class="mt-2 list-disc space-y-1 pl-5 text-neutral-600 dark:text-neutral-400">
+                    {job.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )
+              }
             </li>
           ))}
         </ol>
       )
     }
 
-    {
-      skills.length > 0 && (
-        <ul class="mt-8 flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <li class="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
-              {skill}
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    <div class="mt-8">
+      <SkillGroup label="Skills" items={profesh_skills} />
+      <SkillGroup label="Software" items={tech_skill_areas} />
+      <SkillGroup label="Art" items={art_skill_areas} />
+      <SkillGroup label="Music" items={music_skills} />
+    </div>
   </section>
 </BaseLayout>

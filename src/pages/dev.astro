@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import { tech_skill_areas, tech_skills, prog_languages } from '../data/site';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -11,17 +13,22 @@ const projects = (await getCollection('projects')).sort(
 <BaseLayout title="Dev" description="Software projects by Avery Wagner.">
   <h1 class="text-3xl font-bold tracking-tight">Dev</h1>
   <p class="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">
-    A few things I've built. More on the way.
+    My software projects.
   </p>
+
+  <div class="mt-10 flex flex-col gap-6">
+    <SkillGroup label="Areas" items={tech_skill_areas} emphasized />
+    <SkillGroup label="Languages" items={prog_languages} />
+    <SkillGroup label="Tools & Platforms" items={tech_skills} />
+  </div>
 
   {
     projects.length === 0 ? (
       <p class="mt-16 text-neutral-500 dark:text-neutral-400">
-        Nothing posted yet — check back soon, or see what I'm up to on{' '}
+        Under construction. See what I'm up to on{' '}
         <a href="https://github.com/avery-wagner" class="underline">
           GitHub
-        </a>{' '}
-        in the meantime.
+        </a>
       </p>
     ) : (
       <div class="mt-10 grid gap-6 sm:grid-cols-2">

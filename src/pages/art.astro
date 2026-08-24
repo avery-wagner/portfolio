@@ -2,18 +2,25 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArtCard from '../components/ArtCard.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import { art_skill_areas, art_skills } from '../data/site';
 
 const pieces = (await getCollection('art')).sort((a, b) => b.data.year - a.data.year);
 ---
 
 <BaseLayout title="Art" description="Paintings by Avery Wagner.">
   <h1 class="text-3xl font-bold tracking-tight">Art</h1>
-  <p class="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">A selection of paintings.</p>
+  <p class="mt-3 max-w-xl text-neutral-600 dark:text-neutral-400">Paintings + Graphic Design Work</p>
+
+  <div class="mt-10 flex flex-col gap-6">
+    <SkillGroup label="Areas" items={art_skill_areas} emphasized />
+    <SkillGroup label="Tools" items={art_skills} />
+  </div>
 
   {
     pieces.length === 0 ? (
       <p class="mt-16 text-neutral-500 dark:text-neutral-400">
-        Gallery's coming soon — photos are on the way.
+        Under construction.
       </p>
     ) : (
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
